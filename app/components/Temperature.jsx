@@ -4,12 +4,13 @@
 * @Email:  me@andreeray.se
 * @Filename: Temperature.jsx
 * @Last modified by:   DevelDoe
-* @Last modified time: 2017-03-05T17:23:10+01:00
+* @Last modified time: 2017-03-05T18:00:45+01:00
 */
 
 
 
-var React = require('react'), WeatherAPI = require('WeatherAPI'), LocationAPI = require('LocationAPI')
+var React = require('react'), actions = require('actions'), store = require('storeConfig').config()
+
 
 var Temperature = React.createClass({
     getInitialState: function () {
@@ -19,34 +20,15 @@ var Temperature = React.createClass({
     },
     componentDidMount: function () {
         var that = this
-        LocationAPI.getLocation().then(function(location){
-            WeatherAPI.getTemperature(location).then(function (temperature) {
-                that.setState({
-                    location: location,
-                    temperature: temperature,
-                    isFetching: false
-                })
-            }, function (e) {
-                that.setState({
-                    isFetching: false,
-                    errorMessage: e.message
-                })
-            })
-        }, function (e) {
-            that.setState({
-                isFetching: false,
-                errorMessage: e.message
-            })
+        var unsubscribe = store.subscribe(() => {
+            var state = store.getState()
+            if (state.temp.isFetching) document.getElementById('app').innerHTML = "loading..."
+            else if (state.temp.temp) document.getElementById('app').innerHTML = state.temp.temp + " in " + state.temp.location
         })
+        store.dispatch(actions.fetchTemp())
     },
     render: function () {
-        var {isFetching,temperature,location,errorMessage} = this.state
-        function renderMessage () {
-            if (isFetching) return <span>isFetching...</span>
-            else if (temperature && location) return <span>{temperature} in {location}</span>
-            else if (typeof errorMessage === 'string') <span>{errorMessage}</span>
-        }
-        return <div>{renderMessage()}</div>
+        return (<div></div>)
     }
 })
 module.exports = Temperature

@@ -4,7 +4,7 @@
 * @Email:  me@andreeray.se
 * @Filename: webpack.config.js
 * @Last modified by:   DevelDoe
-* @Last modified time: 2017-03-05T17:18:12+01:00
+* @Last modified time: 2017-03-05T17:57:18+01:00
 */
 
 
@@ -34,7 +34,10 @@ module.exports = {
         modulesDirectories: [
             'node_modules',
             './app/components',
-            './app/api'
+            './app/api',
+            './app/actions',
+            './app/reducers'
+            ,'./app/store'
         ],
         alias: {
             styles: 'app/styles/app.scss'
