@@ -3,12 +3,12 @@
 @Date:   2017-03-05T15:47:54+01:00
 @Email:  me@andreeray.se
 @Filename: readme.md
-@Last modified by:   DevelDoe
-@Last modified time: 2017-03-05T15:53:53+01:00
+@Last modified by:   develdoe
+@Last modified time: 2017-03-10T04:12:24+01:00
 -->
 
 
 
-# React Component Weather
+# React Component Temp
 
-This component contains a project that gets the current temperatur at a users location
+Gets the current temperatur at location
